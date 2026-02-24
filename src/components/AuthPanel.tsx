@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const FEATURES = [
   {
@@ -65,15 +66,15 @@ export default function AuthPanel() {
 
       <div className="relative z-10 flex flex-col gap-10 h-full">
         {/* Logo */}
-        <Link href="/" className="inline-flex items-center gap-2 font-bold text-lg tracking-tight text-primary w-fit">
-          <span
-            aria-hidden="true"
-            className="flex h-8 w-8 items-center justify-center rounded-xl text-white text-sm font-black"
-            style={{ background: "hsl(var(--accent))" }}
-          >
-            G
-          </span>
-          GrowthOS
+        <Link href="/" className="inline-flex items-center w-fit">
+          <Image
+            src="/assets/imgs/logo-growthos-dark-theme.png"
+            alt="GrowthOS"
+            width={160}
+            height={32}
+            className="h-8 w-auto"
+            priority
+          />
         </Link>
 
         {/* Headline */}

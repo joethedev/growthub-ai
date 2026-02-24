@@ -1,5 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import Image from "next/image";
 import AuthPanel from "@/components/AuthPanel";
 import type { Metadata } from "next";
 
@@ -18,15 +19,15 @@ export default function SignInPage() {
       >
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
-          <div className="flex items-center gap-2 font-bold text-lg tracking-tight text-primary mb-10 lg:hidden">
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-xl text-white text-sm font-black"
-              style={{ background: "hsl(var(--accent))" }}
-            >
-              G
-            </span>
-            GrowthOS
+          <div className="mb-10 lg:hidden">
+            <Image
+              src="/assets/imgs/logo-growthos-dark-theme.png"
+              alt="GrowthOS"
+              width={160}
+              height={32}
+              className="h-8 w-auto"
+              priority
+            />
           </div>
 
           <div className="mb-8">

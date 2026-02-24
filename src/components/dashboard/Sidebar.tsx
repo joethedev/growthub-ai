@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import { useSidebar } from "@/components/dashboard/SidebarProvider";
@@ -66,19 +67,15 @@ function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
     <>
       {/* Logo */}
       <div className="flex items-center justify-between px-6 h-16 border-b border-subtle shrink-0">
-        <Link
-          href="/"
-          onClick={onNavigate}
-          className="flex items-center gap-2 font-bold text-base tracking-tight text-primary"
-        >
-          <span
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-white text-xs font-black"
-            style={{ background: "hsl(var(--accent))" }}
-            aria-hidden="true"
-          >
-            G
-          </span>
-          GrowthOS
+        <Link href="/" onClick={onNavigate} className="flex items-center">
+          <Image
+            src="/assets/imgs/logo-growthos-dark-theme.png"
+            alt="GrowthOS"
+            width={140}
+            height={28}
+            className="h-7 w-auto"
+            priority
+          />
         </Link>
 
         {/* Close button — mobile only */}

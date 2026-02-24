@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
@@ -43,15 +45,15 @@ export default function Navbar() {
           aria-label="Main navigation"
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight text-primary">
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-xl text-white text-sm font-black"
-              style={{ background: "hsl(var(--accent))" }}
-            >
-              G
-            </span>
-            GrowthOS
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/assets/imgs/logo-growthos-dark-theme.png"
+              alt="GrowthOS"
+              width={160}
+              height={32}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop center links */}
