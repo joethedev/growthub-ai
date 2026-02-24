@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
+import { useSidebar } from "@/components/dashboard/SidebarProvider";
 
 const NAV = [
   {
@@ -56,17 +57,20 @@ const NAV = [
   },
 ];
 
-export default function Sidebar() {
+// ─── Shared inner panel ───────────────────────────────────────────────────────
+
+function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <aside
-      className="hidden lg:flex flex-col w-60 shrink-0 border-r border-subtle h-screen sticky top-0"
-      style={{ backgroundColor: "hsl(var(--bg-secondary))" }}
-    >
+    <>
       {/* Logo */}
-      <div className="flex items-center gap-2 px-6 h-16 border-b border-subtle shrink-0">
-        <Link href="/" className="flex items-center gap-2 font-bold text-base tracking-tight text-primary">
+      <div className="flex items-center justify-between px-6 h-16 border-b border-subtle shrink-0">
+        <Link
+          href="/"
+          onClick={onNavigate}
+          className="flex items-center gap-2 font-bold text-base tracking-tight text-primary"
+        >
           <span
             className="flex h-7 w-7 items-center justify-center rounded-lg text-white text-xs font-black"
             style={{ background: "hsl(var(--accent))" }}
@@ -76,6 +80,19 @@ export default function Sidebar() {
           </span>
           GrowthOS
         </Link>
+
+        {/* Close button — mobile only */}
+        {onNavigate && (
+          <button
+            onClick={onNavigate}
+            aria-label="Close menu"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-muted hover:text-primary hover:bg-white/5 transition-colors lg:hidden"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Nav */}
@@ -86,10 +103,9 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-                active
-                  ? "text-primary"
-                  : "text-muted hover:text-primary hover:bg-white/5"
+                active ? "text-primary" : "text-muted hover:text-primary hover:bg-white/5"
               }`}
               style={active ? { backgroundColor: "hsl(var(--accent) / 0.12)", color: "hsl(var(--accent))" } : {}}
               aria-current={active ? "page" : undefined}
@@ -103,15 +119,60 @@ export default function Sidebar() {
 
       {/* User */}
       <div className="border-t border-subtle px-5 py-4 flex items-center gap-3">
-        <UserButton
-          appearance={{
-            elements: {
-              avatarBox: "h-8 w-8",
-            },
-          }}
-        />
+        <UserButton appearance={{ elements: { avatarBox: "h-8 w-8" } }} />
         <span className="text-xs text-muted truncate">My Account</span>
       </div>
-    </aside>
+    </>
+  );
+}
+
+// ─── Sidebar (desktop static + mobile drawer) ─────────────────────────────────
+
+export default function Sidebar() {
+  const { open, close } = useSidebar();
+
+  return (
+    <>
+      {/* ── Desktop: static sidebar ── */}
+      <aside
+        className="hidden lg:flex flex-col w-60 shrink-0 border-r border-subtle h-screen sticky top-0"
+        style={{ backgroundColor: "hsl(var(--bg-secondary))" }}
+      >
+        <NavPanel />
+      </aside>
+
+      {/* ── Mobile: backdrop + drawer ── */}
+
+      {/* Backdrop */}
+      <div
+        aria-hidden="true"
+        onClick={close}
+        className="lg:hidden fixed inset-0 z-40"
+        style={{
+          backgroundColor: "rgba(0,0,0,0.55)",
+          backdropFilter: "blur(3px)",
+          WebkitBackdropFilter: "blur(3px)",
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? "auto" : "none",
+          transition: "opacity 280ms ease",
+        }}
+      />
+
+      {/* Drawer panel */}
+      <aside
+        className="lg:hidden fixed inset-y-0 left-0 z-50 flex flex-col w-72 border-r border-subtle"
+        style={{
+          backgroundColor: "hsl(var(--bg-secondary))",
+          transform: open ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+          willChange: "transform",
+        }}
+        aria-label="Mobile navigation drawer"
+        role="dialog"
+        aria-modal="true"
+      >
+        <NavPanel onNavigate={close} />
+      </aside>
+    </>
   );
 }
