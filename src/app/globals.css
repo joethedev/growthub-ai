@@ -1,7 +1,33 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens ──────────────────────────────────────────── */
+/* ─── Design Tokens — Light (default) ───────────────────────── */
 :root {
+  /* Backgrounds */
+  --bg-primary:   210 20% 98%;
+  --bg-secondary: 220 14% 93%;
+  --bg-card:      0 0% 100%;
+
+  /* Text */
+  --text-primary: 222 47% 11%;
+  --text-muted:   220 9% 46%;
+
+  /* Accent — electric violet-blue */
+  --accent:       252 95% 65%;
+  --accent-glow:  252 95% 55%;
+
+  /* Borders */
+  --border:       220 13% 87%;
+
+  /* States */
+  --danger:       0 84% 60%;
+  --success:      142 71% 45%;
+
+  /* Hover overlay */
+  --hover-overlay: 0 0% 0%;
+}
+
+/* ─── Design Tokens — Dark ───────────────────────────────────── */
+.dark {
   /* Backgrounds */
   --bg-primary:   222 47% 11%;
   --bg-secondary: 222 40% 14%;
@@ -21,6 +47,9 @@
   /* States */
   --danger:       0 84% 60%;
   --success:      142 71% 45%;
+
+  /* Hover overlay */
+  --hover-overlay: 0 0% 100%;
 }
 
 /* ─── Tailwind theme extension ───────────────────────────────── */
@@ -53,6 +82,8 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Smooth theme switch */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ─── Utility Classes ────────────────────────────────────────── */
@@ -66,6 +97,10 @@ body {
 .text-danger  { color: hsl(var(--danger)); }
 
 .border-subtle { border-color: hsl(var(--border)); }
+
+/* Hover overlay — adapts to dark/light */
+.hover-muted:hover       { background-color: hsl(var(--hover-overlay) / 0.06); }
+.hover-muted-strong:hover{ background-color: hsl(var(--hover-overlay) / 0.12); }
 
 /* ─── Card ───────────────────────────────────────────────────── */
 .card {

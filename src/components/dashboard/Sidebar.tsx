@@ -5,6 +5,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import { useSidebar } from "@/components/dashboard/SidebarProvider";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const NAV = [
   {
@@ -62,6 +64,10 @@ const NAV = [
 
 function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const logoFilter = mounted && resolvedTheme === "light" ? "invert(1)" : undefined;
 
   return (
     <>
@@ -74,6 +80,7 @@ function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
             width={140}
             height={28}
             className="h-7 w-auto"
+            style={logoFilter ? { filter: logoFilter } : undefined}
             priority
           />
         </Link>
@@ -83,7 +90,7 @@ function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
           <button
             onClick={onNavigate}
             aria-label="Close menu"
-            className="flex h-8 w-8 items-center justify-center rounded-xl text-muted hover:text-primary hover:bg-white/5 transition-colors lg:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-xl text-muted hover:text-primary hover-muted transition-colors lg:hidden"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -102,7 +109,7 @@ function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
               href={item.href}
               onClick={onNavigate}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-                active ? "text-primary" : "text-muted hover:text-primary hover:bg-white/5"
+                active ? "text-primary" : "text-muted hover:text-primary hover-muted"
               }`}
               style={active ? { backgroundColor: "hsl(var(--accent) / 0.12)", color: "hsl(var(--accent))" } : {}}
               aria-current={active ? "page" : undefined}

@@ -1,9 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs'
-import "./globals.css";
 import { dark } from '@clerk/themes'
-
-
-
+import { ThemeProvider } from "@/components/ThemeProvider";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -12,9 +10,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider appearance={{ theme: dark }}>
-      <html lang="en" className="dark">
+      <html lang="en" suppressHydrationWarning>
         <body className="antialiased">
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

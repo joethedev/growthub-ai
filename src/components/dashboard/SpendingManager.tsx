@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useCallback } from "react";
+import { useState, useTransition, useCallback, useEffect } from "react";
 import Modal from "@/components/ui/Modal";
 import { getSpendingsByPeriod, createSpending, updateSpending, deleteSpending } from "@/actions/spendings";
 import { getBudgetsByPeriod } from "@/actions/budgets";
@@ -20,7 +20,7 @@ export default function SpendingManager({ periods, currency }: Props) {
   const [selectedPeriodId, setSelectedPeriodId] = useState(periods[0]?.id ?? "");
   const [spendings, setSpendings] = useState<Spending[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(!!periods[0]?.id);
   const [modal, setModal] = useState<"add" | "edit" | null>(null);
   const [editing, setEditing] = useState<Spending | null>(null);
   const [form, setForm] = useState(emptyForm);
@@ -36,14 +36,20 @@ export default function SpendingManager({ periods, currency }: Props) {
       ]);
       setSpendings(s);
       setBudgets(b);
-      setLoaded(true);
+      setLoading(false);
     });
+  }, []);
+
+  // Auto-load the most recent period on mount
+  useEffect(() => {
+    if (periods[0]?.id) loadData(periods[0].id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function selectPeriod(id: string) {
     setSelectedPeriodId(id);
-    setLoaded(false);
-    loadData(id);
+    if (id) { setLoading(true); loadData(id); }
+    else { setSpendings([]); setBudgets([]); setLoading(false); }
   }
 
   function openAdd() {
@@ -113,18 +119,18 @@ export default function SpendingManager({ periods, currency }: Props) {
           <option value="">— Select a period —</option>
           {periods.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
-        {selectedPeriodId && !selectedPeriod?.is_closed && loaded && budgets.length > 0 && (
+        {selectedPeriodId && !selectedPeriod?.is_closed && !loading && budgets.length > 0 && (
           <button onClick={openAdd} className="button-primary text-sm px-4 py-2">+ Add Spending</button>
-        )}
-        {selectedPeriodId && (
-          <button onClick={() => loadData(selectedPeriodId)} className="button-secondary text-sm px-3 py-2">Load</button>
         )}
       </div>
 
       {!selectedPeriodId && <div className="card py-16 text-center text-sm text-muted">Select a period to view spendings.</div>}
-      {selectedPeriodId && !loaded && <div className="card py-16 text-center text-sm text-muted">Click &ldquo;Load&rdquo; to fetch spendings.</div>}
 
-      {loaded && (
+      {selectedPeriodId && loading && (
+        <div className="card py-16 text-center text-sm text-muted">Loading…</div>
+      )}
+
+      {!loading && selectedPeriodId && (
         <>
           {/* Summary bar */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
@@ -144,7 +150,7 @@ export default function SpendingManager({ periods, currency }: Props) {
 
           {spendings.length === 0 ? (
             <div className="card py-12 text-center text-sm text-muted">
-              {budgets.length === 0 ? "No budgets for this period. Create budgets first." : "No spendings yet."}
+              {budgets.length === 0 ? "No budgets for this period. Create budgets first." : "No spendings yet. Add your first spending above!"}
             </div>
           ) : (
             <div className="space-y-6">
@@ -155,7 +161,7 @@ export default function SpendingManager({ periods, currency }: Props) {
                     {grouped[date].map((s, i) => (
                       <div
                         key={s.id}
-                        className={`flex items-center gap-3 px-5 py-3.5 hover:bg-white/[0.02] transition-colors ${i < grouped[date].length - 1 ? "border-b border-subtle" : ""}`}
+                        className={`flex items-center gap-3 px-5 py-3.5 hover-muted transition-colors ${i < grouped[date].length - 1 ? "border-b border-subtle" : ""}`}
                       >
                         <span
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm"
@@ -176,7 +182,7 @@ export default function SpendingManager({ periods, currency }: Props) {
                           </span>
                           {!selectedPeriod?.is_closed && (
                             <div className="flex gap-1">
-                              <button onClick={() => openEdit(s)} aria-label="Edit" className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:text-primary hover:bg-white/5 transition-colors">
+                              <button onClick={() => openEdit(s)} aria-label="Edit" className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:text-primary hover-muted transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                               </button>
                               <button onClick={() => handleDelete(s.id)} aria-label="Delete" className="flex h-7 w-7 items-center justify-center rounded-lg transition-colors hover:bg-red-500/10" style={{ color: "hsl(var(--text-muted))" }}>

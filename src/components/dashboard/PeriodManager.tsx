@@ -106,8 +106,8 @@ export default function PeriodManager({ initialPeriods }: Props) {
 
             {!p.is_closed && (
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={() => openEdit(p)} className="text-xs text-muted hover:text-primary px-3 py-1.5 rounded-lg border border-subtle hover:bg-white/5 transition-colors">Edit</button>
-                <button onClick={() => handleClose(p)} className="text-xs text-muted hover:text-primary px-3 py-1.5 rounded-lg border border-subtle hover:bg-white/5 transition-colors">Close</button>
+                <button onClick={() => openEdit(p)} className="text-xs text-muted hover:text-primary px-3 py-1.5 rounded-lg border border-subtle hover-muted transition-colors">Edit</button>
+                <button onClick={() => handleClose(p)} className="text-xs text-muted hover:text-primary px-3 py-1.5 rounded-lg border border-subtle hover-muted transition-colors">Close</button>
                 <button onClick={() => handleDelete(p.id)} className="text-xs px-3 py-1.5 rounded-lg border border-subtle transition-colors hover:bg-red-500/5" style={{ color: "hsl(var(--text-muted))" }}>Delete</button>
               </div>
             )}

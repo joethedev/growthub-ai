@@ -31,7 +31,7 @@ export default function TransactionList({ transactions, currency }: Props) {
           {transactions.map((tx) => (
             <div
               key={tx.id}
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/[0.03]"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover-muted"
             >
               {/* Category color dot / icon */}
               <div

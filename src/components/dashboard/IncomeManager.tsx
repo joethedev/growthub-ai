@@ -241,7 +241,7 @@ export default function IncomeManager({ initialIncomes, currency }: Props) {
                     onClick={() => handleToggle(inc)}
                     disabled={isPending}
                     title={inc.is_active ? "Deactivate" : "Activate"}
-                    className="h-7 w-7 flex items-center justify-center rounded-lg text-muted hover:text-primary hover:bg-white/5 transition-colors"
+                    className="h-7 w-7 flex items-center justify-center rounded-lg text-muted hover:text-primary hover-muted transition-colors"
                   >
                     {inc.is_active ? (
                       <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
@@ -251,7 +251,7 @@ export default function IncomeManager({ initialIncomes, currency }: Props) {
                   </button>
                   <button
                     onClick={() => openEdit(inc)}
-                    className="h-7 w-7 flex items-center justify-center rounded-lg text-muted hover:text-primary hover:bg-white/5 transition-colors"
+                    className="h-7 w-7 flex items-center justify-center rounded-lg text-muted hover:text-primary hover-muted transition-colors"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                   </button>

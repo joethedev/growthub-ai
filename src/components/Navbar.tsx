@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-
+import ThemeToggle from "@/components/ThemeToggle";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
@@ -14,6 +15,10 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const logoFilter = mounted && resolvedTheme === "light" ? "invert(1)" : undefined;
 
   /* Close drawer on outside click */
   useEffect(() => {
@@ -52,6 +57,7 @@ export default function Navbar() {
               width={160}
               height={32}
               className="h-8 w-auto"
+              style={logoFilter ? { filter: logoFilter } : undefined}
               priority
             />
           </Link>
@@ -72,6 +78,7 @@ export default function Navbar() {
 
           {/* Desktop right actions */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Link href="/sign-in" className="button-secondary text-sm px-4 py-2">
               Log In
             </Link>
@@ -82,7 +89,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col justify-center items-center gap-1.25 w-9 h-9 rounded-lg transition-colors hover:bg-white/5"
+            className="md:hidden flex flex-col justify-center items-center gap-1.25 w-9 h-9 rounded-lg transition-colors hover-muted"
             onClick={() => setDrawerOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={drawerOpen}
@@ -132,7 +139,7 @@ export default function Navbar() {
           <button
             onClick={() => setDrawerOpen(false)}
             aria-label="Close navigation menu"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:text-primary hover:bg-white/5 transition-colors"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted hover:text-primary hover-muted transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -148,7 +155,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setDrawerOpen(false)}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted transition-all duration-150 hover:bg-white/5 hover:text-primary"
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted transition-all duration-150 hover-muted hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -159,6 +166,7 @@ export default function Navbar() {
 
         {/* Drawer CTAs */}
         <div className="mt-auto flex flex-col gap-3">
+          <ThemeToggle className="w-full rounded-xl" />
           <Link
             href="/sign-in"
             className="button-secondary w-full justify-center"

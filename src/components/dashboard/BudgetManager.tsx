@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useCallback } from "react";
+import { useState, useTransition, useCallback, useEffect } from "react";
 import Modal from "@/components/ui/Modal";
 import { getBudgetsByPeriod, createBudget, updateBudget, deleteBudget } from "@/actions/budgets";
 import { fmtAmount } from "@/lib/format-currency";
@@ -17,7 +17,7 @@ const emptyForm = { category_id: "", max_amount: "", is_recurrent: false };
 export default function BudgetManager({ periods, categories, currency }: Props) {
   const [selectedPeriodId, setSelectedPeriodId] = useState(periods[0]?.id ?? "");
   const [budgets, setBudgets] = useState<Budget[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(!!periods[0]?.id);
   const [modal, setModal] = useState<"add" | "edit" | null>(null);
   const [editing, setEditing] = useState<Budget | null>(null);
   const [form, setForm] = useState(emptyForm);
@@ -29,14 +29,20 @@ export default function BudgetManager({ periods, categories, currency }: Props) 
     startTransition(async () => {
       const data = await getBudgetsByPeriod(periodId);
       setBudgets(data);
-      setLoaded(true);
+      setLoading(false);
     });
+  }, []);
+
+  // Auto-load the most recent period on mount
+  useEffect(() => {
+    if (periods[0]?.id) loadBudgets(periods[0].id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function selectPeriod(id: string) {
     setSelectedPeriodId(id);
-    setLoaded(false);
-    loadBudgets(id);
+    if (id) { setLoading(true); loadBudgets(id); }
+    else { setBudgets([]); setLoading(false); }
   }
 
   function openAdd() {
@@ -106,14 +112,9 @@ export default function BudgetManager({ periods, categories, currency }: Props) 
             <option key={p.id} value={p.id}>{p.name}</option>
           ))}
         </select>
-        {selectedPeriodId && !selectedPeriod?.is_closed && (
+        {selectedPeriodId && !selectedPeriod?.is_closed && !loading && (
           <button onClick={openAdd} className="button-primary text-sm px-4 py-2 whitespace-nowrap" disabled={availableCategories.length === 0}>
             + Add Budget
-          </button>
-        )}
-        {selectedPeriodId && (
-          <button onClick={() => loadBudgets(selectedPeriodId)} className="button-secondary text-sm px-3 py-2">
-            Load
           </button>
         )}
       </div>
@@ -122,15 +123,15 @@ export default function BudgetManager({ periods, categories, currency }: Props) 
         <div className="card py-16 text-center text-sm text-muted">Select a tracking period to manage budgets.</div>
       )}
 
-      {selectedPeriodId && !loaded && (
-        <div className="card py-16 text-center text-sm text-muted">Click &ldquo;Load&rdquo; to fetch budgets.</div>
+      {selectedPeriodId && loading && (
+        <div className="card py-16 text-center text-sm text-muted">Loading…</div>
       )}
 
-      {loaded && budgets.length === 0 && (
+      {!loading && selectedPeriodId && budgets.length === 0 && (
         <div className="card py-16 text-center text-sm text-muted">No budgets for this period yet.</div>
       )}
 
-      {loaded && budgets.length > 0 && (
+      {!loading && selectedPeriodId && budgets.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {budgets.map((b) => {
             const spent = parseFloat(b.spent_total ?? "0");
@@ -163,7 +164,7 @@ export default function BudgetManager({ periods, categories, currency }: Props) 
 
                 {!selectedPeriod?.is_closed && (
                   <div className="flex gap-2 pt-1">
-                    <button onClick={() => openEdit(b)} className="text-xs flex-1 py-1.5 rounded-lg border border-subtle text-muted hover:text-primary hover:bg-white/5 transition-colors">Edit</button>
+                    <button onClick={() => openEdit(b)} className="text-xs flex-1 py-1.5 rounded-lg border border-subtle text-muted hover:text-primary hover-muted transition-colors">Edit</button>
                     <button onClick={() => handleDelete(b.id)} className="text-xs flex-1 py-1.5 rounded-lg border border-subtle transition-colors hover:bg-red-500/5" style={{ color: "hsl(var(--text-muted))" }}>Delete</button>
                   </div>
                 )}
@@ -174,7 +175,7 @@ export default function BudgetManager({ periods, categories, currency }: Props) 
       )}
 
       {/* ── Spending Breakdown Chart ─────────────────────────────────────── */}
-      {loaded && budgets.length > 0 && (
+      {!loading && budgets.length > 0 && (
         <div className="mt-6 card">
           <p className="text-sm font-semibold text-primary mb-4">Spending Breakdown</p>
           <div className="space-y-3">

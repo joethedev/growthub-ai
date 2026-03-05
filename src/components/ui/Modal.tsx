@@ -47,7 +47,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:text-primary hover:bg-white/5 transition-colors"
+            className="flex h-7 w-7 items-center justify-center rounded-lg text-muted hover:text-primary hover-muted transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
           </button>

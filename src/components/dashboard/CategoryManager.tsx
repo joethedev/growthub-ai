@@ -116,7 +116,7 @@ export default function CategoryManager({ initialCategories }: Props) {
             </thead>
             <tbody>
               {visible.map((c) => (
-                <tr key={c.id} className="border-b border-subtle last:border-0 hover:bg-white/[0.02] transition-colors">
+                <tr key={c.id} className="border-b border-subtle last:border-0 hover-muted transition-colors">
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3">
                       <span
@@ -131,8 +131,8 @@ export default function CategoryManager({ initialCategories }: Props) {
                   <td className="px-5 py-3.5 text-muted hidden sm:table-cell">{c.description ?? "—"}</td>
                   <td className="px-5 py-3.5">
                     <div className="flex items-center justify-end gap-2">
-                      <button onClick={() => openEdit(c)} className="text-xs text-muted hover:text-primary px-2 py-1 rounded-lg hover:bg-white/5 transition-colors">Edit</button>
-                      <button onClick={() => handleArchive(c)} className="text-xs text-muted hover:text-primary px-2 py-1 rounded-lg hover:bg-white/5 transition-colors">Archive</button>
+                      <button onClick={() => openEdit(c)} className="text-xs text-muted hover:text-primary px-2 py-1 rounded-lg hover-muted transition-colors">Edit</button>
+                      <button onClick={() => handleArchive(c)} className="text-xs text-muted hover:text-primary px-2 py-1 rounded-lg hover-muted transition-colors">Archive</button>
                       <button onClick={() => handleDelete(c.id)} className="text-xs hover:text-danger px-2 py-1 rounded-lg hover:bg-red-500/5 transition-colors" style={{ color: "hsl(var(--text-muted))" }}>Delete</button>
                     </div>
                   </td>
@@ -217,7 +217,7 @@ export default function CategoryManager({ initialCategories }: Props) {
                         role="option"
                         aria-selected={form.icon === icon}
                         onClick={() => { setForm((f) => ({ ...f, icon })); setIconPickerOpen(false); }}
-                        className="flex h-9 w-full items-center justify-center rounded-lg text-lg transition-colors hover:bg-white/10"
+                        className="flex h-9 w-full items-center justify-center rounded-lg text-lg transition-colors hover-muted-strong"
                         style={form.icon === icon ? { backgroundColor: `${form.color}22`, outline: `2px solid ${form.color}` } : {}}
                         title={icon}
                       >
@@ -230,7 +230,7 @@ export default function CategoryManager({ initialCategories }: Props) {
                     <button
                       type="button"
                       onClick={() => { setForm((f) => ({ ...f, icon: "" })); setIconPickerOpen(false); }}
-                      className="w-full text-center text-xs text-muted hover:text-primary py-1 rounded-lg hover:bg-white/5 transition-colors"
+                      className="w-full text-center text-xs text-muted hover:text-primary py-1 rounded-lg hover-muted transition-colors"
                     >
                       Clear icon
                     </button>

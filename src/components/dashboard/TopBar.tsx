@@ -3,6 +3,7 @@
 import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/components/dashboard/SidebarProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const PAGE_TITLES: Record<string, string> = {
   "/dashboard": "Overview",
@@ -29,7 +30,7 @@ export default function TopBar() {
         <button
           onClick={toggle}
           aria-label="Open navigation menu"
-          className="lg:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-subtle text-muted hover:text-primary hover:bg-white/5 transition-colors"
+          className="lg:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-subtle text-muted hover-muted hover:text-primary transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -39,10 +40,13 @@ export default function TopBar() {
       </div>
 
       <div className="flex items-center gap-3">
+        {/* Theme toggle */}
+        <ThemeToggle />
+
         {/* Notification bell */}
         <button
           aria-label="Notifications"
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-subtle text-muted hover:text-primary hover:bg-white/5 transition-colors"
+          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-subtle text-muted hover-muted hover:text-primary transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
