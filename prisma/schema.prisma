@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+// User model - stores user information and preferences
+model User {
+  id            String     @id @default(cuid())
+  clerkId       String     @unique @map("clerk_id")
+  email         String     @unique
+  firstName     String?    @map("first_name")
+  lastName      String?    @map("last_name")
+  imageUrl      String?    @map("image_url")
+  currency      String     @default("USD") // USD, EUR, MAD, GBP, CAD, AED
+  role          String     @default("user")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  categories        Category[]
+  trackingPeriods   TrackingPeriod[]
+  incomes           Income[]
+
+  @@map("users")
+}
+
+// Category model - user-defined spending categories
+model Category {
+  id          String     @id @default(cuid())
+  userId      String     @map("user_id")
+  name        String
+  description String?
+  icon        String?
+  color       String?
+  isArchived  Boolean    @default(false) @map("is_archived")
+  createdAt   DateTime   @default(now()) @map("created_at")
+
+  // Relations
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  budgets     Budget[]
+
+  @@unique([userId, name])
+  @@map("categories")
+}
+
+// TrackingPeriod model - defines time periods for budgeting
+model TrackingPeriod {
+  id        String     @id @default(cuid())
+  userId    String     @map("user_id")
+  name      String
+  type      String     // MONTHLY | WEEKLY | CUSTOM
+  startDate DateTime   @map("start_date")
+  endDate   DateTime   @map("end_date")
+  isClosed  Boolean    @default(false) @map("is_closed")
+  createdAt DateTime   @default(now()) @map("created_at")
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  budgets   Budget[]
+
+  @@map("tracking_periods")
+}
+
+// Budget model - budget allocation per category per period
+model Budget {
+  id                String         @id @default(cuid())
+  trackingPeriodId  String         @map("tracking_period_id")
+  categoryId        String         @map("category_id")
+  maxAmount         Decimal        @map("max_amount") @db.Decimal(10, 2)
+  isRecurrent       Boolean        @default(false) @map("is_recurrent")
+  createdAt         DateTime       @default(now()) @map("created_at")
+
+  // Relations
+  trackingPeriod    TrackingPeriod @relation(fields: [trackingPeriodId], references: [id], onDelete: Cascade)
+  category          Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  spendings         Spending[]
+
+  @@unique([trackingPeriodId, categoryId])
+  @@map("budgets")
+}
+
+// Spending model - individual expense transactions
+model Spending {
+  id            String     @id @default(cuid())
+  budgetId      String     @map("budget_id")
+  amount        Decimal    @db.Decimal(10, 2)
+  spendingDate  DateTime   @map("spending_date")
+  note          String?    @db.Text
+  createdAt     DateTime   @default(now()) @map("created_at")
+
+  // Relations
+  budget        Budget     @relation(fields: [budgetId], references: [id], onDelete: Cascade)
+
+  @@map("spendings")
+}
+
+// Income model - tracks income streams
+model Income {
+  id        String     @id @default(cuid())
+  userId    String     @map("user_id")
+  name      String
+  type      String
+  amount    Decimal    @db.Decimal(10, 2)
+  frequency String     // once, weekly, bi_weekly, monthly, quarterly, yearly
+  receivedAt DateTime? @map("received_at")
+  notes     String?    @db.Text
+  isActive  Boolean    @default(true) @map("is_active")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("incomes")
+}

@@ -68,7 +68,7 @@ export default function AuthPanel() {
         {/* Logo */}
         <Link href="/" className="inline-flex items-center w-fit">
           <Image
-            src="/assets/imgs/logo-growthos-dark-theme.png"
+            src="/assets/imgs/logo-finmchawfloussi.png"
             alt="GrowthOS"
             width={160}
             height={32}

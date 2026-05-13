@@ -1,23 +1,23 @@
 const AI_INSIGHTS = [
   {
-    emoji: "⚠️",
-    category: "Food & Dining",
-    message: "You are likely to overspend on Food this week.",
-    detail: "Current spend: $320 · Budget: $400 · Projected: $480",
+    emoji: "🎙️",
+    category: "Voice Note",
+    message: '"Srift 120 dh f restaurant"',
+    detail: "Logged as Food expense · 120 dh · This week",
     type: "warning",
   },
   {
-    emoji: "✦",
-    category: "Productivity",
-    message: "You complete 34% more tasks on Tuesday mornings.",
-    detail: "Block 9–11 AM on Tuesday for deep work sessions.",
+    emoji: "🧾",
+    category: "Voice Note",
+    message: '"Khlsst lkra 2500"',
+    detail: "Logged as Rent expense · 2,500 dh · This month",
     type: "insight",
   },
   {
-    emoji: "📉",
-    category: "Subscriptions",
-    message: "3 unused subscriptions detected — save $87/mo.",
-    detail: "Figma Pro, Loom Pro, Notion Plus unused last 30 days.",
+    emoji: "🛒",
+    category: "Voice Note",
+    message: '"Chrit l7lib w khodra b 85 dh"',
+    detail: "Logged as Groceries expense · 85 dh · Today",
     type: "savings",
   },
 ];
@@ -45,26 +45,26 @@ export default function AISection() {
           {/* ── Left: text ── */}
           <div className="flex-1 max-w-lg">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-              AI Engine
+              Voice Tracking
             </p>
             <h2
               id="ai-heading"
               className="mb-5 text-3xl font-extrabold tracking-tight text-primary sm:text-4xl"
             >
-              Insights that act
+              The fastest way to log
               <br />
-              before you have to
+              your spendings
             </h2>
             <p className="mb-8 text-base leading-relaxed text-muted">
-              Our AI models analyze thousands of data points — spending velocity, task completion rates,
-              and industry benchmarks — to surface what matters right now.
+              Just send a voice note in Moroccan Darija. FinMchawFloussi automatically
+              turns your voice into organized expenses so you can focus on better decisions.
             </p>
             <ul className="space-y-3 text-sm text-muted">
               {[
-                "Proactive overspend alerts — before they hit",
-                "Pattern-based productivity coaching",
-                "Subscription audit and waste detection",
-                "Weekly AI growth report, straight to your inbox",
+                "No typing",
+                "No friction",
+                "No excuses",
+                "Track naturally in the language you use every day",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span

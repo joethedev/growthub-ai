@@ -21,7 +21,7 @@ export default function SignInPage() {
           {/* Mobile logo */}
           <div className="mb-10 lg:hidden">
             <Image
-              src="/assets/imgs/logo-growthos-dark-theme.png"
+              src="/assets/imgs/logo-finmchawfloussi.png"
               alt="GrowthOS"
               width={160}
               height={32}

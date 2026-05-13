@@ -52,7 +52,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/assets/imgs/logo-growthos-dark-theme.png"
+              src="/assets/imgs/logo-finmchawfloussi.png"
               alt="GrowthOS"
               width={160}
               height={32}

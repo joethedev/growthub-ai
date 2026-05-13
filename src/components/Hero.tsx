@@ -32,36 +32,33 @@ export default function Hero() {
                 className="h-1.5 w-1.5 rounded-full"
                 style={{ backgroundColor: "hsl(var(--accent))" }}
               />
-              AI-Powered · v2.0 Now Live
+              Built for Morocco · Darija Voice Input
             </div>
 
             <h1
               id="hero-heading"
               className="mb-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-primary sm:text-5xl lg:text-6xl"
             >
-              Your AI Growth Partner
+              Take Control of Your Money
               <br />
-              for{" "}
-              <span className="gradient-text">Productivity</span>
-              {" "}&amp;{" "}
-              <span className="gradient-text">Money</span>
+              <span className="gradient-text">In Darija</span>
             </h1>
 
             <p className="mb-10 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-              GrowthOS learns your spending patterns, flags risks before they happen,
-              and helps you focus on what actually moves the needle. One dashboard for
-              your productivity and finances.
+              Finally, a budgeting app made for real life in Morocco. No complicated
+              spreadsheets. No confusing finance terms. Just speak naturally, track
+              your spending, and understand where your money goes.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <Link href="#" className="button-primary w-full sm:w-auto px-7 py-3 text-base">
-                Start Tracking
+                Create Your Account
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
               <Link href="#features" className="button-secondary w-full sm:w-auto px-7 py-3 text-base">
-                See How It Works
+                Start Tracking in Minutes
               </Link>
             </div>
 
@@ -77,7 +74,7 @@ export default function Hero() {
                 ))}
               </div>
               <span>
-                <strong className="text-primary font-semibold">4,200+</strong> teams growing with GrowthOS
+                <strong className="text-primary font-semibold">Simple. Fast.</strong> Built for everyday life in Morocco
               </span>
             </div>
           </div>
@@ -114,9 +111,9 @@ function AppMockup() {
         {/* Stats row */}
         <div className="grid grid-cols-3 gap-3">
           {[
-            { label: "Revenue", value: "$24,800", change: "+12%" },
-            { label: "Expenses", value: "$8,320", change: "-4%" },
-            { label: "Tasks Done", value: "94/100", change: "+8%" },
+            { label: "Spent", value: "4,280 dh", change: "+9%" },
+            { label: "Remaining", value: "1,720 dh", change: "This month" },
+            { label: "Income Est.", value: "7,500 dh", change: "Updated" },
           ].map((stat) => (
             <div key={stat.label} className="card p-3! space-y-1.5">
               <span className="block text-[10px] text-muted uppercase tracking-wider">{stat.label}</span>
@@ -131,8 +128,8 @@ function AppMockup() {
         {/* Chart bar placeholder */}
         <div className="card p-4!">
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-xs font-medium text-muted">Monthly Spending</span>
-            <span className="text-xs text-accent font-semibold">This Week</span>
+            <span className="text-xs font-medium text-muted">Spending Trends</span>
+            <span className="text-xs text-accent font-semibold">Week View</span>
           </div>
           <div className="flex items-end gap-1.5 h-20">
             {[40, 65, 50, 80, 55, 90, 70].map((h, i) => (
@@ -158,7 +155,7 @@ function AppMockup() {
           <span className="text-base" aria-hidden="true">✦</span>
           <span className="text-muted">
             <strong className="text-primary">AI insight:</strong>{" "}
-            Food spend is 28% above your average this week.
+            You are close to your Food budget limit this week.
           </span>
         </div>
       </div>
