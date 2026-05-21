@@ -1,21 +1,20 @@
+import { useTranslations } from "next-intl";
+
 const AI_INSIGHTS = [
   {
     emoji: "🎙️",
-    category: "Voice Note",
     message: '"Srift 120 dh f restaurant"',
     detail: "Logged as Food expense · 120 dh · This week",
     type: "warning",
   },
   {
     emoji: "🧾",
-    category: "Voice Note",
     message: '"Khlsst lkra 2500"',
     detail: "Logged as Rent expense · 2,500 dh · This month",
     type: "insight",
   },
   {
     emoji: "🛒",
-    category: "Voice Note",
     message: '"Chrit l7lib w khodra b 85 dh"',
     detail: "Logged as Groceries expense · 85 dh · Today",
     type: "savings",
@@ -23,6 +22,15 @@ const AI_INSIGHTS = [
 ];
 
 export default function AISection() {
+  const t = useTranslations("AISection");
+
+  const featuresList = [
+    t("featureNoTyping"),
+    t("featureNoFriction"),
+    t("featureNoExcuses"),
+    t("featureNatural"),
+  ];
+
   return (
     <section
       aria-labelledby="ai-heading"
@@ -45,27 +53,21 @@ export default function AISection() {
           {/* ── Left: text ── */}
           <div className="flex-1 max-w-lg">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-              Voice Tracking
+              {t("eyebrow")}
             </p>
             <h2
               id="ai-heading"
               className="mb-5 text-3xl font-extrabold tracking-tight text-primary sm:text-4xl"
             >
-              The fastest way to log
+              {t("heading1")}
               <br />
-              your spendings
+              {t("heading2")}
             </h2>
             <p className="mb-8 text-base leading-relaxed text-muted">
-              Just send a voice note in Moroccan Darija. FinMchawFloussi automatically
-              turns your voice into organized expenses so you can focus on better decisions.
+              {t("description")}
             </p>
             <ul className="space-y-3 text-sm text-muted">
-              {[
-                "No typing",
-                "No friction",
-                "No excuses",
-                "Track naturally in the language you use every day",
-              ].map((item) => (
+              {featuresList.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
@@ -83,7 +85,11 @@ export default function AISection() {
           {/* ── Right: AI insight cards ── */}
           <div className="flex-1 w-full space-y-4" aria-label="Sample AI insights">
             {AI_INSIGHTS.map((insight) => (
-              <InsightCard key={insight.category} insight={insight} />
+              <InsightCard
+                key={insight.message}
+                insight={insight}
+                voiceNoteLabel={t("voiceNoteLabel")}
+              />
             ))}
           </div>
         </div>
@@ -95,9 +101,10 @@ export default function AISection() {
 /* ── Individual insight card ─────────────────────────────── */
 type InsightProps = {
   insight: (typeof AI_INSIGHTS)[number];
+  voiceNoteLabel: string;
 };
 
-function InsightCard({ insight }: InsightProps) {
+function InsightCard({ insight, voiceNoteLabel }: InsightProps) {
   const isWarning = insight.type === "warning";
 
   return (
@@ -132,7 +139,7 @@ function InsightCard({ insight }: InsightProps) {
             className="text-[11px] font-semibold uppercase tracking-wider"
             style={{ color: isWarning ? "hsl(var(--danger))" : "hsl(var(--accent))" }}
           >
-            {insight.category}
+            {voiceNoteLabel}
           </span>
         </div>
         <p className="text-sm font-medium text-primary mb-1">{insight.message}</p>

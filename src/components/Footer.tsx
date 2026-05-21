@@ -1,11 +1,14 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
-const FOOTER_LINKS = {
+type FooterT = ReturnType<typeof useTranslations<"Footer">>;
+
+const FOOTER_LINK_KEYS = {
   Product: ["Features", "Pricing", "Changelog", "Roadmap"],
   Company: ["About", "Blog", "Careers", "Press"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
+  Legal: ["PrivacyPolicy", "TermsOfService", "CookiePolicy"],
   Support: ["Documentation", "Status", "Contact", "Community"],
-};
+} as const;
 
 const SOCIAL_LINKS = [
   {
@@ -38,6 +41,8 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer aria-label="Site footer" className="border-t border-subtle bg-primary mt-8">
       <div className="mx-auto max-w-6xl px-6 pt-14 pb-10">
@@ -56,36 +61,38 @@ export default function Footer() {
               Floussi.Pro
             </Link>
             <p className="text-sm leading-relaxed text-muted max-w-50">
-              Your AI growth partner for productivity and finances.
+              {t("tagline")}
             </p>
           </div>
 
           {/* Link columns */}
-          {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
-                {category}
-              </h3>
-              <ul className="space-y-2.5 list-none m-0 p-0">
-                {links.map((link) => (
-                  <li key={link}>
-                    <Link
-                      href="#"
-                      className="text-sm text-muted transition-colors duration-150 hover:text-primary"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {(Object.entries(FOOTER_LINK_KEYS) as [keyof typeof FOOTER_LINK_KEYS, readonly string[]][]).map(
+            ([category, linkKeys]) => (
+              <div key={category}>
+                <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
+                  {t(category as Parameters<FooterT>[0])}
+                </h3>
+                <ul className="space-y-2.5 list-none m-0 p-0">
+                  {linkKeys.map((key) => (
+                    <li key={key}>
+                      <Link
+                        href="#"
+                        className="text-sm text-muted transition-colors duration-150 hover:text-primary"
+                      >
+                        {t(key as Parameters<FooterT>[0])}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          )}
         </div>
 
         {/* Bottom row */}
         <div className="flex flex-col items-center gap-4 border-t border-subtle pt-8 sm:flex-row sm:justify-between">
           <p className="text-xs text-muted order-2 sm:order-1">
-            © {new Date().getFullYear()} Floussi.Pro, Inc. All rights reserved.
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
 
           {/* Social icons */}

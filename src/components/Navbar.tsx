@@ -3,22 +3,32 @@
 import Image from "next/image";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useTheme } from "next-themes";
-
-const NAV_LINKS = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-];
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Navbar() {
+  const t = useTranslations("Navbar");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const logoFilter = mounted && resolvedTheme === "light" ? "invert(1)" : undefined;
+
+  const NAV_LINKS = [
+    { label: t("features"), href: "#features" as const },
+    { label: t("pricing"), href: "#pricing" as const },
+    { label: t("about"), href: "#about" as const },
+  ];
+
+  function switchLocale(next: string) {
+    router.replace(pathname, { locale: next });
+  }
 
   /* Close drawer on outside click */
   useEffect(() => {
@@ -36,7 +46,9 @@ export default function Navbar() {
   /* Lock scroll while drawer is open */
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [drawerOpen]);
 
   return (
@@ -78,12 +90,20 @@ export default function Navbar() {
 
           {/* Desktop right actions */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Locale switcher */}
+            <button
+              onClick={() => switchLocale(locale === "en" ? "ar" : "en")}
+              className="text-xs font-semibold px-2.5 py-1 rounded-lg border border-subtle text-muted hover:text-primary hover-muted transition-colors"
+              aria-label="Switch language"
+            >
+              {locale === "en" ? "عربي" : "EN"}
+            </button>
             <ThemeToggle />
             <Link href="/sign-in" className="button-secondary text-sm px-4 py-2">
-              Log In
+              {t("signIn")}
             </Link>
             <Link href="/sign-up" className="button-primary text-sm px-4 py-2">
-              Get Started
+              {t("getStarted")}
             </Link>
           </div>
 
@@ -91,7 +111,7 @@ export default function Navbar() {
           <button
             className="md:hidden flex flex-col justify-center items-center gap-1.25 w-9 h-9 rounded-lg transition-colors hover-muted"
             onClick={() => setDrawerOpen(true)}
-            aria-label="Open navigation menu"
+            aria-label={t("openMenu")}
             aria-expanded={drawerOpen}
             aria-controls="mobile-drawer"
           >
@@ -166,20 +186,26 @@ export default function Navbar() {
 
         {/* Drawer CTAs */}
         <div className="mt-auto flex flex-col gap-3">
+          <button
+            onClick={() => { switchLocale(locale === "en" ? "ar" : "en"); setDrawerOpen(false); }}
+            className="text-xs font-semibold px-2.5 py-2 rounded-xl border border-subtle text-muted hover:text-primary hover-muted transition-colors w-full"
+          >
+            {locale === "en" ? "عربي" : "EN"}
+          </button>
           <ThemeToggle className="w-full rounded-xl" />
           <Link
             href="/sign-in"
             className="button-secondary w-full justify-center"
             onClick={() => setDrawerOpen(false)}
           >
-            Log In
+            {t("signIn")}
           </Link>
           <Link
             href="/sign-up"
             className="button-primary w-full justify-center"
             onClick={() => setDrawerOpen(false)}
           >
-            Get Started
+            {t("getStarted")}
           </Link>
         </div>
       </div>

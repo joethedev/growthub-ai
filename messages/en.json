@@ -1,0 +1,98 @@
+{
+  "Navbar": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "signIn": "Log In",
+    "getStarted": "Get Started",
+    "openMenu": "Open navigation menu"
+  },
+  "Hero": {
+    "badge": "Built for Morocco · Darija Voice Input",
+    "heading1": "Take Control of Your Money",
+    "heading2": "In Darija",
+    "description": "Finally, a budgeting app made for real life in Morocco. No complicated spreadsheets. No confusing finance terms. Just speak naturally, track your spending, and understand where your money goes.",
+    "ctaPrimary": "Create Your Account",
+    "ctaSecondary": "Start Tracking in Minutes",
+    "socialProofStrong": "Simple. Fast.",
+    "socialProofText": "Built for everyday life in Morocco"
+  },
+  "Features": {
+    "eyebrow": "Features",
+    "heading": "Finally, budgeting that feels natural",
+    "description": "No typing. No friction. No excuses. Just natural tracking that helps you stay in control without making budgeting stressful.",
+    "feature0Title": "Track Expenses With Your Voice",
+    "feature0Description": "Send a voice note in Moroccan Darija and Floussi.Pro turns it into organized expenses automatically.",
+    "feature1Title": "Know Exactly Where Your Money Goes",
+    "feature1Description": "See your spending by month, week, or custom periods so you understand your habits before money disappears.",
+    "feature2Title": "Build Budgets That Actually Work",
+    "feature2Description": "Set category limits for food, transport, rent, shopping, family, and bills with alerts before overspending.",
+    "feature3Title": "One Dashboard. Full Visibility.",
+    "feature3Description": "Instantly view total spending, remaining budget, monthly income estimate, trends, top categories, and transactions.",
+    "feature4Title": "Designed for Everyday Life",
+    "feature4Description": "Great for saving money, managing family expenses, reducing impulsive spending, and planning each month better.",
+    "feature5Title": "Simple. Fast. Built for Morocco.",
+    "feature5Description": "Supports Darija voice input, your preferred currency, and a clean mobile-first interface for daily usage."
+  },
+  "AISection": {
+    "eyebrow": "Voice Tracking",
+    "heading1": "The fastest way to log",
+    "heading2": "your spendings",
+    "description": "Just send a voice note in Moroccan Darija. Floussi.Pro automatically turns your voice into organized expenses so you can focus on better decisions.",
+    "featureNoTyping": "No typing",
+    "featureNoFriction": "No friction",
+    "featureNoExcuses": "No excuses",
+    "featureNatural": "Track naturally in the language you use every day",
+    "voiceNoteLabel": "Voice Note",
+    "loggedAs": "Logged as"
+  },
+  "CTA": {
+    "eyebrow": "Your Money Shouldn't Feel Confusing",
+    "heading1": "Most people don't need",
+    "heading2": "complicated finance apps.",
+    "description": "They just need a simple way to answer: \"Fin mchaw floussi?\" Create your account and start tracking your money in minutes.",
+    "ctaPrimary": "Create Your Account",
+    "ctaSecondary": "Start Tracking in Minutes",
+    "trustLine": "No complicated spreadsheets · No confusing finance terms · Just clarity"
+  },
+  "Footer": {
+    "tagline": "Your AI growth partner for productivity and finances.",
+    "copyright": "© {year} Floussi.Pro, Inc. All rights reserved.",
+    "Product": "Product",
+    "Company": "Company",
+    "Legal": "Legal",
+    "Support": "Support",
+    "Features": "Features",
+    "Pricing": "Pricing",
+    "Changelog": "Changelog",
+    "Roadmap": "Roadmap",
+    "About": "About",
+    "Blog": "Blog",
+    "Careers": "Careers",
+    "Press": "Press",
+    "PrivacyPolicy": "Privacy Policy",
+    "TermsOfService": "Terms of Service",
+    "CookiePolicy": "Cookie Policy",
+    "Documentation": "Documentation",
+    "Status": "Status",
+    "Contact": "Contact",
+    "Community": "Community"
+  },
+  "Dashboard": {
+    "greetMorning": "Good morning, {name} 👋",
+    "greetAfternoon": "Good afternoon, {name} 👋",
+    "greetEvening": "Good evening, {name} 👋",
+    "periodInfo": "Showing data for your current period: {periodName}.",
+    "noPeriod": "Set up a tracking period to start seeing your data here."
+  },
+  "Sidebar": {
+    "dashboard": "Dashboard",
+    "spendings": "Spendings",
+    "budgets": "Budgets",
+    "categories": "Categories",
+    "incomes": "Incomes",
+    "periods": "Periods",
+    "settings": "Settings",
+    "signOut": "Sign out"
+  }
+}

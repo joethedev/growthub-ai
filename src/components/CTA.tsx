@@ -1,6 +1,8 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function CTA() {
+  const t = useTranslations("CTA");
   return (
     <section aria-labelledby="cta-heading" className="section px-6">
       <div className="mx-auto max-w-6xl">
@@ -25,7 +27,7 @@ export default function CTA() {
           <div className="relative">
             {/* Eyebrow */}
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
-              Your Money Shouldn't Feel Confusing
+              {t("eyebrow")}
             </p>
 
             {/* Heading */}
@@ -33,37 +35,36 @@ export default function CTA() {
               id="cta-heading"
               className="mb-5 text-3xl font-extrabold tracking-tight text-primary sm:text-4xl lg:text-5xl"
             >
-              Most people don't need
+              {t("heading1")}
               <br />
-              <span className="gradient-text">complicated finance apps.</span>
+              <span className="gradient-text">{t("heading2")}</span>
             </h2>
 
             {/* Sub */}
             <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              They just need a simple way to answer: "Fin mchaw floussi?" Create your
-              account and start tracking your money in minutes.
+              {t("description")}
             </p>
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="#"
+                href="/sign-up"
                 className="button-primary px-9 py-3.5 text-base"
                 style={{ boxShadow: "0 0 32px 4px hsl(var(--accent) / 0.35)" }}
               >
-                Create Your Account
+                {t("ctaPrimary")}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="#" className="button-secondary px-9 py-3.5 text-base">
-                Start Tracking in Minutes
+              <Link href="/sign-up" className="button-secondary px-9 py-3.5 text-base">
+                {t("ctaSecondary")}
               </Link>
             </div>
 
             {/* Trust line */}
             <p className="mt-8 text-xs text-muted">
-              No complicated spreadsheets · No confusing finance terms · Just clarity
+              {t("trustLine")}
             </p>
           </div>
         </div>

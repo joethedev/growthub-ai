@@ -1,6 +1,8 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
+  const t = useTranslations("Hero");
   return (
     <section
       aria-labelledby="hero-heading"
@@ -32,33 +34,31 @@ export default function Hero() {
                 className="h-1.5 w-1.5 rounded-full"
                 style={{ backgroundColor: "hsl(var(--accent))" }}
               />
-              Built for Morocco · Darija Voice Input
+              {t("badge")}
             </div>
 
             <h1
               id="hero-heading"
               className="mb-6 text-4xl font-extrabold leading-[1.1] tracking-tight text-primary sm:text-5xl lg:text-6xl"
             >
-              Take Control of Your Money
+              {t("heading1")}
               <br />
-              <span className="gradient-text">In Darija</span>
+              <span className="gradient-text">{t("heading2")}</span>
             </h1>
 
             <p className="mb-10 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-              Finally, a budgeting app made for real life in Morocco. No complicated
-              spreadsheets. No confusing finance terms. Just speak naturally, track
-              your spending, and understand where your money goes.
+              {t("description")}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <Link href="#" className="button-primary w-full sm:w-auto px-7 py-3 text-base">
-                Create Your Account
+                {t("ctaPrimary")}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
               <Link href="#features" className="button-secondary w-full sm:w-auto px-7 py-3 text-base">
-                Start Tracking in Minutes
+                {t("ctaSecondary")}
               </Link>
             </div>
 
@@ -74,7 +74,7 @@ export default function Hero() {
                 ))}
               </div>
               <span>
-                <strong className="text-primary font-semibold">Simple. Fast.</strong> Built for everyday life in Morocco
+                <strong className="text-primary font-semibold">{t("socialProofStrong")}</strong> {t("socialProofText")}
               </span>
             </div>
           </div>
