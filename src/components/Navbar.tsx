@@ -52,11 +52,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/assets/imgs/logo-finmchawfloussi.png"
-              alt="GrowthOS"
-              width={160}
-              height={32}
-              className="h-8 w-auto"
+              src="/assets/imgs/logo-floussi.png"
+              alt="Floussi.Pro"
+              width={180}
+              height={40}
+              className="h-10 w-auto"
               style={logoFilter ? { filter: logoFilter } : undefined}
               priority
             />
@@ -134,7 +134,7 @@ export default function Navbar() {
             >
               G
             </span>
-            GrowthOS
+            Floussi.Pro
           </Link>
           <button
             onClick={() => setDrawerOpen(false)}

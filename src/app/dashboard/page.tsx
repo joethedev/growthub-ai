@@ -8,7 +8,7 @@ import AIAlerts from "@/components/dashboard/AIAlerts";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dashboard — GrowthOS",
+  title: "Dashboard — Floussi.Pro",
 };
 
 function greet(firstName: string) {

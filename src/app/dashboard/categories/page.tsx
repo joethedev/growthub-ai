@@ -1,7 +1,7 @@
 import { getCategories } from "@/actions/categories";
 import CategoryManager from "@/components/dashboard/CategoryManager";
 
-export const metadata = { title: "Categories — GrowthOS" };
+export const metadata = { title: "Categories — Floussi.Pro" };
 
 export default async function CategoriesPage() {
   const categories = await getCategories();

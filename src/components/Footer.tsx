@@ -53,7 +53,7 @@ export default function Footer() {
               >
                 G
               </span>
-              GrowthOS
+              Floussi.Pro
             </Link>
             <p className="text-sm leading-relaxed text-muted max-w-50">
               Your AI growth partner for productivity and finances.
@@ -85,7 +85,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col items-center gap-4 border-t border-subtle pt-8 sm:flex-row sm:justify-between">
           <p className="text-xs text-muted order-2 sm:order-1">
-            © {new Date().getFullYear()} GrowthOS, Inc. All rights reserved.
+            © {new Date().getFullYear()} Floussi.Pro, Inc. All rights reserved.
           </p>
 
           {/* Social icons */}

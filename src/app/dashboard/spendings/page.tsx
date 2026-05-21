@@ -2,7 +2,7 @@ import { getPeriods } from "@/actions/periods";
 import { getUserSettings } from "@/actions/settings";
 import SpendingManager from "@/components/dashboard/SpendingManager";
 
-export const metadata = { title: "Spendings — GrowthOS" };
+export const metadata = { title: "Spendings — Floussi.Pro" };
 
 export default async function SpendingsPage() {
   const [periods, user] = await Promise.all([getPeriods(), getUserSettings()]);

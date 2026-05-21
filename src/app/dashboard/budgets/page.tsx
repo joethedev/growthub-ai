@@ -3,7 +3,7 @@ import { getCategories } from "@/actions/categories";
 import { getUserSettings } from "@/actions/settings";
 import BudgetManager from "@/components/dashboard/BudgetManager";
 
-export const metadata = { title: "Budgets — GrowthOS" };
+export const metadata = { title: "Budgets — Floussi.Pro" };
 
 export default async function BudgetsPage() {
   const [periods, categories, user] = await Promise.all([getPeriods(), getCategories(), getUserSettings()]);

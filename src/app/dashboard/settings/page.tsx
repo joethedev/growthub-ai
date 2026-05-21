@@ -1,7 +1,7 @@
 import { getUserSettings } from "@/actions/settings";
 import SettingsForm from "@/components/dashboard/SettingsForm";
 
-export const metadata = { title: "Settings — GrowthOS" };
+export const metadata = { title: "Settings — Floussi.Pro" };
 
 export default async function SettingsPage() {
   const user = await getUserSettings();

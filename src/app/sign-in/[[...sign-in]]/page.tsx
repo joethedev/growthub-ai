@@ -5,8 +5,8 @@ import AuthPanel from "@/components/AuthPanel";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sign In — GrowthOS",
-  description: "Sign in to your GrowthOS account.",
+  title: "Sign In — Floussi.Pro",
+  description: "Sign in to your Floussi.Pro account.",
 };
 
 export default function SignInPage() {
@@ -21,8 +21,8 @@ export default function SignInPage() {
           {/* Mobile logo */}
           <div className="mb-10 lg:hidden">
             <Image
-              src="/assets/imgs/logo-finmchawfloussi.png"
-              alt="GrowthOS"
+              src="/assets/imgs/logo-floussi.png"
+              alt="Floussi.Pro"
               width={160}
               height={32}
               className="h-8 w-auto"
@@ -68,7 +68,7 @@ export default function SignInPage() {
       </section>
 
       {/* ── Right: Auth panel (hidden on mobile) ── */}
-      <section className="hidden lg:block bg-secondary" aria-label="Why GrowthOS">
+      <section className="hidden lg:block bg-secondary" aria-label="Why Floussi.Pro">
         <AuthPanel />
       </section>
     </main>

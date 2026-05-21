@@ -2,7 +2,7 @@ import { getIncomes } from "@/actions/incomes";
 import { getUserSettings } from "@/actions/settings";
 import IncomeManager from "@/components/dashboard/IncomeManager";
 
-export const metadata = { title: "Incomes — GrowthOS" };
+export const metadata = { title: "Incomes — Floussi.Pro" };
 
 export default async function IncomesPage() {
   const [incomes, user] = await Promise.all([getIncomes(), getUserSettings()]);

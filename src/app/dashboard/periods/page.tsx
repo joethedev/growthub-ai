@@ -1,7 +1,7 @@
 import { getPeriods } from "@/actions/periods";
 import PeriodManager from "@/components/dashboard/PeriodManager";
 
-export const metadata = { title: "Periods — GrowthOS" };
+export const metadata = { title: "Periods — Floussi.Pro" };
 
 export default async function PeriodsPage() {
   const periods = await getPeriods();

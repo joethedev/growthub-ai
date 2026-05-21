@@ -75,8 +75,8 @@ function NavPanel({ onNavigate }: { onNavigate?: () => void }) {
       <div className="flex items-center justify-between px-6 h-16 border-b border-subtle shrink-0">
         <Link href="/" onClick={onNavigate} className="flex items-center">
           <Image
-            src="/assets/imgs/logo-finmchawfloussi.png"
-            alt="GrowthOS"
+            src="/assets/imgs/logo-floussi.png"
+            alt="Floussi.Pro"
             width={140}
             height={28}
             className="h-7 w-auto"

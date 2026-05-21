@@ -68,8 +68,8 @@ export default function AuthPanel() {
         {/* Logo */}
         <Link href="/" className="inline-flex items-center w-fit">
           <Image
-            src="/assets/imgs/logo-finmchawfloussi.png"
-            alt="GrowthOS"
+            src="/assets/imgs/logo-floussi.png"
+            alt="Floussi.Pro"
             width={160}
             height={32}
             className="h-8 w-auto"
@@ -129,7 +129,7 @@ export default function AuthPanel() {
           style={{ borderColor: "hsl(var(--accent) / 0.2)" }}
         >
           <blockquote className="text-sm leading-relaxed text-muted mb-3">
-            &ldquo;GrowthOS cut our monthly review meetings in half. The AI catches
+            &ldquo;Floussi.Pro cut our monthly review meetings in half. The AI catches
             spending anomalies before I even open the app.&rdquo;
           </blockquote>
           <figcaption className="flex items-center gap-3">
