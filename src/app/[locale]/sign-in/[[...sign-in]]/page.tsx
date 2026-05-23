@@ -9,7 +9,12 @@ export const metadata: Metadata = {
   description: "Sign in to your Floussi.Pro account.",
 };
 
-export default function SignInPage() {
+export default async function SignInPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <main className="min-h-screen grid lg:grid-cols-[1fr_1.1fr]">
       {/* ── Left: Sign-in form ── */}
@@ -39,36 +44,44 @@ export default function SignInPage() {
             </p>
           </div>
 
-          <SignIn 
-                  routing="path"
-                  path="/sign-in"
-                  signUpUrl="/sign-up"
-                  fallbackRedirectUrl="/dashboard"
-                  appearance={{
-                    elements: {
-                      rootBox: "w-full",
-                      card: "bg-gradient-to-br from-gray-900/90 to-gray-800/90 border border-emerald-500/30 backdrop-blur-xl shadow-2xl shadow-emerald-500/10 rounded-2xl",
-                      headerTitle: "text-white",
-                      headerSubtitle: "text-gray-400",
-                      socialButtonsBlockButton: "border-gray-700 bg-gray-800/50 hover:bg-gray-800 text-white hover:border-emerald-500/50 transition-all",
-                      formFieldLabel: "text-gray-300",
-                      formFieldInput: "bg-gray-950/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-emerald-500 focus:ring-emerald-500",
-                      formButtonPrimary: "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all",
-                      footerActionLink: "text-emerald-400 hover:text-emerald-300",
-                      identityPreviewText: "text-white",
-                      identityPreviewEditButton: "text-emerald-400 hover:text-emerald-300",
-                      formResendCodeLink: "text-emerald-400 hover:text-emerald-300",
-                      otpCodeFieldInput: "bg-gray-950/50 border-gray-700 text-white focus:border-emerald-500",
-                      dividerLine: "bg-gray-700",
-                      dividerText: "text-gray-400",
-                    }
-                  }}
-                />
+          <SignIn
+            routing="path"
+            path={`/${locale}/sign-in`}
+            signUpUrl={`/${locale}/sign-up`}
+            fallbackRedirectUrl={`/${locale}/dashboard`}
+            appearance={{
+              elements: {
+                rootBox: "w-full",
+                card: "bg-gradient-to-br from-gray-900/90 to-gray-800/90 border border-emerald-500/30 backdrop-blur-xl shadow-2xl shadow-emerald-500/10 rounded-2xl",
+                headerTitle: "text-white",
+                headerSubtitle: "text-gray-400",
+                socialButtonsBlockButton:
+                  "border-gray-700 bg-gray-800/50 hover:bg-gray-800 text-white hover:border-emerald-500/50 transition-all",
+                formFieldLabel: "text-gray-300",
+                formFieldInput:
+                  "bg-gray-950/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-emerald-500 focus:ring-emerald-500",
+                formButtonPrimary:
+                  "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all",
+                footerActionLink: "text-emerald-400 hover:text-emerald-300",
+                identityPreviewText: "text-white",
+                identityPreviewEditButton:
+                  "text-emerald-400 hover:text-emerald-300",
+                formResendCodeLink: "text-emerald-400 hover:text-emerald-300",
+                otpCodeFieldInput:
+                  "bg-gray-950/50 border-gray-700 text-white focus:border-emerald-500",
+                dividerLine: "bg-gray-700",
+                dividerText: "text-gray-400",
+              },
+            }}
+          />
         </div>
       </section>
 
       {/* ── Right: Auth panel (hidden on mobile) ── */}
-      <section className="hidden lg:block bg-secondary" aria-label="Why Floussi.Pro">
+      <section
+        className="hidden lg:block bg-secondary"
+        aria-label="Why Floussi.Pro"
+      >
         <AuthPanel />
       </section>
     </main>
